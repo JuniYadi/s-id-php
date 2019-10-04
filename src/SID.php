@@ -158,14 +158,27 @@ class SID
      */
     public function short($url)
     {
-        $request = $this->guzzle->post(
-            $this->endpoint.'api/public/link/shorten',
+        if ($this->login) {
+            $url = $this->endpoint.'api/internal/link/shorten';
+            $headers = [
+                'Host'      => 's.id',
+                'Origin'    => 'https://s.id',
+                'Referer'   => 'https://s.id/regular/dashboard',
+                'X-CSRF-TOKEN' => $this->token,
+                'X-XSRF-TOKEN' => $this->token,
+            ];
+        } else {
+            $url = $this->endpoint.'api/public/link/shorten';
+            $headers = [
+                'Host'      => 's.id',
+                'Origin'    => 'https://s.id',
+                'Referer'   => 'https://s.id/',
+            ];
+        }
+
+        $request = $this->guzzle->post($url,
             [
-                'headers' => [
-                    'Host'      => 's.id',
-                    'Origin'    => 'https://s.id',
-                    'Referer'   => 'https://s.id/',
-                ],
+                'headers' => $headers,
                 'form_params' => [
                     'url' => $url,
                 ],
