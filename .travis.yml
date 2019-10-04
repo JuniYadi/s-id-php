@@ -5,12 +5,13 @@ php:
   - '7.2'
   - '7.3'
   - hhvm
-  - nightly
+    env: HHVM=true
 
-before_script:
-  - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
+install:
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+  - if [[ $HHVM == true ]]; then composer require "phpunit/phpunit:5.7"; fi
   - phpenv config-rm xdebug.ini || true
 
-install: travis_retry composer install --no-interaction --prefer-dist --no-suggest
-
-script: vendor/bin/phpunit
+script:
+  - if [[ $HHVM == true ]]; then ./vendor/bin/phpunit .; fi
+  - if [[ $HHVM != true ]]; then phpunit .; fi
