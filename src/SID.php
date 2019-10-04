@@ -88,7 +88,7 @@ class SID
             }
 
             $this->guzzle = new Client([
-                'verify'    => false,
+                'verify' => false,
             ]);
 
             $this->jar = new CookieJar();
@@ -104,9 +104,9 @@ class SID
             $this->endpoint.'auth/login',
             [
                 'headers' => [
-                    'Host'          => 's.id',
-                    'Origin'        => 'https://s.id',
-                    'User-Agent'    => $this->useragent,
+                    'Host' => 's.id',
+                    'Origin' => 'https://s.id',
+                    'User-Agent' => $this->useragent,
                 ],
                 'cookies' => $this->jar,
             ]
@@ -122,8 +122,8 @@ class SID
     {
         if ($this->login) {
             $this->guzzle = new Client([
-                'verify'    => false,
-                'cookies'   => $this->jar,
+                'verify' => false,
+                'cookies' => $this->jar,
             ]);
         } else {
             throw new \Exception('Username and Password ');
@@ -133,13 +133,13 @@ class SID
             $this->endpoint.'auth/login',
             [
                 'headers' => [
-                    'Host'      => 's.id',
-                    'Origin'    => 'https://s.id',
+                    'Host' => 's.id',
+                    'Origin' => 'https://s.id',
                 ],
                 'form_params' => [
-                    '_token'    => $this->token,
-                    'username'  => $this->username,
-                    'password'  => $this->password,
+                    '_token' => $this->token,
+                    'username' => $this->username,
+                    'password' => $this->password,
                 ],
             ]
         );
@@ -162,9 +162,9 @@ class SID
             $this->endpoint.'api/public/link/shorten',
             [
                 'headers' => [
-                    'Host'      => 's.id',
-                    'Origin'    => 'https://s.id',
-                    'Referer'   => 'https://s.id/',
+                    'Host' => 's.id',
+                    'Origin' => 'https://s.id',
+                    'Referer' => 'https://s.id/',
                 ],
                 'form_params' => [
                     'url' => $url,
@@ -174,7 +174,7 @@ class SID
 
         $response = json_decode($request->getBody());
         $result = [
-            'url'      => $this->endpoint.$response->short,
+            'url' => $this->endpoint.$response->short,
             'original' => $response->long_url,
         ];
 
