@@ -83,7 +83,7 @@ class SID
             $this->username     = $data['username'] ?? null;
             $this->password     = $data['password'] ?? null;
 
-            if (!empty($data['username'] and $data['password'])) {
+            if (isset($data['username']) and isset($data['password'])) {
                 $this->login = true;
             }
 
