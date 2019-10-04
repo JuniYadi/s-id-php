@@ -15,14 +15,22 @@
             "email": "me@juniyadi.id"
         }
     ],
+    "minimum-stability": "stable",
     "require": {
         "php": "^7.0",
         "guzzlehttp/guzzle": "^6.3"
     },
-    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
     "autoload": {
         "psr-4": {
             "JuniYadi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     }
 }
