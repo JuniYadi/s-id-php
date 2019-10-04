@@ -161,9 +161,9 @@ class SID
         if ($this->login) {
             $url = $this->endpoint.'api/internal/link/shorten';
             $headers = [
-                'Host'      => 's.id',
-                'Origin'    => 'https://s.id',
-                'Referer'   => 'https://s.id/regular/dashboard',
+                'Host'         => 's.id',
+                'Origin'       => 'https://s.id',
+                'Referer'      => 'https://s.id/regular/dashboard',
                 'X-CSRF-TOKEN' => $this->token,
                 'X-XSRF-TOKEN' => $this->token,
             ];
@@ -178,7 +178,7 @@ class SID
 
         $request = $this->guzzle->post($url,
             [
-                'headers' => $headers,
+                'headers'     => $headers,
                 'form_params' => [
                     'url' => $url,
                 ],
