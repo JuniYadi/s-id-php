@@ -1,0 +1,26 @@
+{
+    "name": "juniyadi/s-id",
+    "description": "s.id short url php package",
+    "keywords": ["s.id", "php", "short url"],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/JuniYadi/s-id-php",
+    "support": {
+        "issues": "https://github.com/JuniYadi/s-id-php/issues",
+        "source": "https://github.com/JuniYadi/s-id-php"
+    },
+    "authors": [
+        {
+            "name": "Juni Yadi",
+            "email": "me@juniyadi.id"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"JuniYadi\\": "src/"}
+    }
+}
