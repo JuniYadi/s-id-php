@@ -21,6 +21,8 @@
     },
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": {"JuniYadi\\": "src/"}
+        "psr-4": {
+            "JuniYadi\\": "src/"
+        }
     }
 }
