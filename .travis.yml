@@ -2,13 +2,6 @@ language: php
 php:
   - '7.2'
   - '7.3'
-  - hhvm
-  - nightly
-
-matrix:
-  allow_failures:
-    - php: nightly
-  fast_finish: true
 
 install: travis_retry composer install --no-interaction --prefer-dist --no-suggest
   
