@@ -1,5 +1,10 @@
 # S.ID
 
+[![Total Downloads](https://poser.pugx.org/juniyadi/s-id/downloads)](https://packagist.org/packages/juniyadi/s-id)
+[![Latest Stable Version](https://poser.pugx.org/juniyadi/s-id/v/stable)](https://packagist.org/packages/juniyadi/s-id)
+[![Build Status](https://travis-ci.org/JuniYadi/s-id-php.svg?branch=master)](https://travis-ci.org/JuniYadi/s-id-php)
+[![License](https://poser.pugx.org/juniyadi/s-id/license)](https://packagist.org/packages/juniyadi/s-id)
+
 This package for short url by https://s.id
 
 # Install
