@@ -3,28 +3,151 @@
 namespace JuniYadi;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Cookie\CookieJar;
 
 class SID
 {
     /**
      * Set Endpoint Api URL
      *
-     * @param string $vars
+     * @param string $endpoint
      */
     private $endpoint;
 
     /**
+     * Username or Email Account S.ID
+     *
+     * @param string $username
+     */
+    private $username;
+
+    /**
+     * Password Account S.ID
+     *
+     * @param string $password
+     */
+    private $password;
+
+    /**
+     * Login Status
+     *
+     * @param bool $login
+     */
+    private $login;
+
+    /**
      * Set Guzzle Instance
+     *
+     * @see GuzzleHttp\Client
      */
     private $guzzle;
 
-    public function __construct(array $data=null)
-    {
-        $this->endpoint = $data['endpoint'] ?? 'https://s.id/';
+    /**
+     * Set Guuzle CookieJar Instance
+     *
+     * @see GuzzleHttp\Cookie\CookieJar
+     */
+    private $jar;
 
-        $this->guzzle = new Client([
-            'verify'    => false
-        ]);
+    /**
+     * User Agent
+     *
+     * @param string $useragent
+     */
+    private $useragent;
+
+    /**
+     * Set Cookie Path
+     *
+     * @param string $cookiepath
+     */
+    private $cookiepath;
+
+    /**
+     * Global CSRF-Token
+     */
+    private $csrf;
+
+    /**
+     * SID Construct Parameters
+     *
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        if (isset($data)) {
+            $this->endpoint     = $data['endpoint'] ?? 'https://s.id/';
+            $this->useragent    = $data['useragent'] ?? 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36';
+
+            // Login Details
+            $this->username     = $data['username'] ?? null;
+            $this->password     = $data['password'] ?? null;
+
+            if (!empty($data['username'] and $data['password'])) {
+                $this->login = true;
+            }
+
+            $this->guzzle = new Client([
+                'verify'    => false
+            ]);
+
+            $this->jar = new CookieJar();
+        }
+    }
+
+    /**
+     * Get Cookie
+     */
+    public function cookie()
+    {
+        $request = $this->guzzle->get(
+            $this->endpoint . 'auth/login',
+            [
+                'headers' => [
+                    'Host'          => 's.id',
+                    'Origin'        => 'https://s.id',
+                    'User-Agent'    => $this->useragent,
+                ],
+                'cookies' => $this->jar
+            ]
+        );
+    }
+
+    /**
+     * Login Action
+     *
+     * @param string $username|$password
+     *
+     */
+    public function login()
+    {
+        if ($this->login) {
+            $this->guzzle = new Client([
+                'verify'    => false,
+                'cookies'   => $this->jar
+            ]);
+        } else {
+            throw new \Exception('Username and Password ');
+        }
+
+        $request = $this->guzzle->post(
+            $this->endpoint . 'auth/login',
+            [
+                'headers' => [
+                    'Host'      => 's.id',
+                    'Origin'    => 'https://s.id'
+                ],
+                'form_params' => [
+                    '_token'    => $this->token,
+                    'username'  => $this->username,
+                    'password'  => $this->password
+                ]
+            ]
+        );
+
+        $response = $request->getBody();
+
+        return $response;
     }
 
     /**
