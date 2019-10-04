@@ -15,6 +15,14 @@ $url = new SID();
 $short = $url->short('https://google.com');
 
 var_dump($short);
+
+## Result
+array(2) {
+  ["url"]=>
+  string(18) "https://s.id/70kin"
+  ["original"]=>
+  string(18) "https://google.com"
+}
 ```
 
 # Information
