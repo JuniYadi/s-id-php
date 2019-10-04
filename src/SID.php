@@ -8,7 +8,7 @@ class SID
 {
     /**
      * Set Endpoint Api URL
-     * 
+     *
      * @param string $vars
      */
     private $endpoint;
@@ -29,14 +29,15 @@ class SID
 
     /**
      * Public Short URL S.ID
-     * 
+     *
      * @param string $url
-     * 
+     *
      * @return array
      */
     public function short($url)
     {
-        $request = $this->guzzle->post($this->endpoint . 'api/public/link/shorten',
+        $request = $this->guzzle->post(
+            $this->endpoint . 'api/public/link/shorten',
             [
                 'headers' => [
                     'Host'      => 's.id',
