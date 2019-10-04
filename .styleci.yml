@@ -3,7 +3,6 @@ risky: true
 
 enabled:
   - strict
-  - align_double_arrow
 
 finder:
   exclude:
